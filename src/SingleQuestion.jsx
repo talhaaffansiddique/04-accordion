@@ -1,10 +1,14 @@
+import React, { useState } from "react";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 
-import React, { useState } from "react";
-
-export const SingleQuestion = ({ title, info }) => {
-  const [showInfo, setShowInfo] = useState(false);
-
+export const SingleQuestion = ({
+  id,
+  title,
+  info,
+  activeId,
+  toggleQuestion,
+}) => {
+  const isActive = id === activeId;
   return (
     <article className="question">
       <header>
@@ -12,13 +16,13 @@ export const SingleQuestion = ({ title, info }) => {
         <button
           className="question-btn"
           onClick={() => {
-            setShowInfo(!showInfo);
+            toggleQuestion(id);
           }}
         >
-          {showInfo ? <AiOutlineMinus /> : <AiOutlinePlus />}
+          {isActive ? <AiOutlineMinus /> : <AiOutlinePlus />}
         </button>
       </header>
-      {showInfo && <p>{info}</p>}
+      {isActive && <p>{info}</p>}
     </article>
   );
 };
